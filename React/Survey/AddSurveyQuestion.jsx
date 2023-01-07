@@ -237,8 +237,6 @@ AddSurveyQuestion.propTypes = {
     id: PropTypes.number,
     question: PropTypes.string,
     text: PropTypes.string,
-    Questions: PropTypes.func,
-    Answers: PropTypes.func,
     surveyId: PropTypes.number,
   }),
   isSubmitting: PropTypes.bool,
