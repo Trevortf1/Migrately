@@ -30,23 +30,23 @@ BEGIN
 			 ,u.Mi as MiddleInitial
 			 ,u.AvatarUrl
 			 ,[Role] = (
-						Select	r.Id
-								,r.Name
-						From dbo.Roles as r inner join dbo.UserRoles as ur
+						SELECT	r.Id
+							,r.Name
+						FROM dbo.Roles as r inner join dbo.UserRoles as ur
 								on r.Id = ur.RoleId
-						Where u.Id = ur.UserId
-						For JSON AUTO
+						WHERE u.Id = ur.UserId
+						FOR JSON AUTO
 			)
 			 ,stts.Id 
 			 ,stts.[Name] 
 			 ,ImmigrantVisa = 
 			 (
 			 SELECT		ivc.Id
-						,ivc.[Name]
-						,ivc.Code
-						,ivc.[Description]
-						,ivc.IsEmployerSponsored
-						,ivc.IsRelativeSponsored
+					,ivc.[Name]
+					,ivc.Code
+					,ivc.[Description]
+					,ivc.IsEmployerSponsored
+					,ivc.IsRelativeSponsored
 			 FROM dbo.ImmigrantVisaCategories as ivc
 			 WHERE ivc.Id = svc.VisaId AND svc.EntityTypeId = 5
 			 FOR JSON AUTO
@@ -58,7 +58,7 @@ BEGIN
 						,nivc.ApprovalAgencyId
 						,ApprovalAgencys = 
 						(Select aa.Id
-								,aa.[Name]
+							,aa.[Name]
 				FROM dbo.ApprovalAgencies as aa
 				WHERE nivc.ApprovalAgencyId = aa.Id
 				FOR JSON AUTO
