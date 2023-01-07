@@ -1,0 +1,48 @@
+ALTER proc [dbo].[Survey_Update]
+		@Id int
+		,@Name nvarchar(100)
+		,@Description nvarchar(2000)
+		,@StatusId int
+		,@SurveyTypeId int
+		,@RequirementId int
+as
+/* TEST CODE
+	
+
+	DECLARE @Id int = 10
+			,@Name nvarchar(100) = 'User FeedBack V3'
+			,@Description nvarchar(2000) = 'Tell Us What we can Improve'
+			,@StatusId int = 1
+			,@SurveyTypeId int = 2
+			,@RequirementId int = 2
+
+	Execute [dbo].[Survey_Update]
+			@Id
+			,@Name
+			,@Description
+			,@StatusId
+			,@SurveyTypeId
+			,@RequirementId 
+
+
+*/
+
+BEGIN
+
+	DECLARE @DatNow datetime2(7) = GETUTCDATE()
+
+
+
+
+	UPDATE [dbo].[Surveys]
+		SET  [Name] = @Name
+			,[Description] = @Description
+			,[StatusId] = @StatusId
+			,[SurveyTypeId] = @SurveyTypeId
+			,[DateModified] = @DatNow
+		WHERE @Id = Id
+
+
+	UPDATE [dbo].[SurveyRequirements]
+	 SET [RequirementId] = @RequirementId
+	 WHERE @Id = dbo.SurveyRequirements.SurveyId
