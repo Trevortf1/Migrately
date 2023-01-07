@@ -62,9 +62,9 @@ BEGIN
 
 
 	INSERT INTO [dbo].[SurveyVisaCategories]
-				([SurveyId]
-				,[EntityTypeId]
-				,[VisaId])
+			([SurveyId]
+			,[EntityTypeId]
+			,[VisaId])
      VALUES
 			   (@Id
 			   ,@EntityTypeId
