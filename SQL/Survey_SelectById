@@ -1,0 +1,94 @@
+ALTER proc [dbo].[Survey_Select_ById]
+		@Id int
+    
+as
+/* TEST CODE
+
+	DECLARE @Id int = 7
+
+	Execute [dbo].[Survey_Select_ById]
+			@Id
+
+*/
+
+BEGIN
+
+		
+	 SELECT   s.Id
+			 ,s.[Name]
+			 ,s.[Description]
+			 ,s.DateCreated
+			 ,s.DateModified
+			 ,ss.Id as SurveyStatusId
+			 ,ss.[Name] as SurveyStatus
+			 ,st.Id as SurveyTypeId
+			 ,st.[Name] as SurveryType
+			 ,u.Id as UserId
+			 ,u.Email
+			 ,u.FirstName
+			 ,u.LastName
+			 ,u.Mi as MiddleInitial
+			 ,u.AvatarUrl
+			 ,[Role] = (
+						Select	r.Id
+								,r.Name
+						From dbo.Roles as r inner join dbo.UserRoles as ur
+								on r.Id = ur.RoleId
+						Where u.Id = ur.UserId
+						For JSON AUTO
+			)
+			 ,stts.Id 
+			 ,stts.[Name] 
+			 ,ImmigrantVisa = 
+			 (
+			 SELECT		ivc.Id
+						,ivc.[Name]
+						,ivc.Code
+						,ivc.[Description]
+						,ivc.IsEmployerSponsored
+						,ivc.IsRelativeSponsored
+			 FROM dbo.ImmigrantVisaCategories as ivc
+			 WHERE ivc.Id = svc.VisaId AND svc.EntityTypeId = 5
+			 FOR JSON AUTO
+			 )
+			 ,NonImmigrantVisa = 
+			 ( SELECT	nivc.Id
+						,nivc.VisaCatergory
+						,nivc.TravelPurpose	 
+						,nivc.ApprovalAgencyId
+						,ApprovalAgencys = 
+						(Select aa.Id
+								,aa.[Name]
+				FROM dbo.ApprovalAgencies as aa
+				WHERE nivc.ApprovalAgencyId = aa.Id
+				FOR JSON AUTO
+				)
+				FROM dbo.NonImmigrantVisaCategories as nivc 
+				WHERE nivc.Id = svc.VisaId AND svc.EntityTypeId = 6
+				FOR JSON AUTO
+			 )
+			 ,r.Id
+			 ,r.[Name]
+			  ,TotalCount = Count(1) OVER()
+	FROM [dbo].[Surveys] as s inner join dbo.Users as u
+		on s.CreatedBy = u.Id
+		inner join dbo.SurveyStatus as ss
+		on s.StatusId = ss.Id
+		inner join dbo.SurveryTypes as st
+		on s.SurveyTypeId = st.Id
+		inner join dbo.SurveyVisaCategories as svc
+		on s.Id = svc.SurveyId
+		inner join dbo.EntityTypes as et
+		on svc.EntityTypeId = et.Id
+		inner join dbo.SurveyRequirements as sr
+		on sr.SurveyId = s.Id
+		inner join dbo.Requirements as r
+		on sr.RequirementId = r.Id
+		inner join dbo.StatusTypes as stts
+		on u.StatusId = stts.Id
+	WHERE @Id = s.Id
+
+
+
+
+END
