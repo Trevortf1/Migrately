@@ -7,9 +7,6 @@ import {
 
 const endpoint = { surveyUrl: `${API_HOST_PREFIX}/api/surveys` };
 
-
-
-
 const getSurveyPaginated = (pageIndex, pageSize) => {
   const config = {
     method: "GET",
