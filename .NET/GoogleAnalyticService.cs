@@ -78,7 +78,7 @@ namespace Sabio.Services
                 ReportRequest reportRequest = new ReportRequest
                 {
 
-                    ViewId = "280646633",
+                    ViewId = //ViewId,
                     DateRanges = new List<DateRange> { dateRange },
                     Dimensions = listOfDemension,
                     Metrics = listOfMetrics
@@ -117,7 +117,7 @@ namespace Sabio.Services
                 ReportRequest reportRequest = new ReportRequest
                 {
 
-                    ViewId = "280646633",
+                    ViewId = //ViewId,
                     DateRanges = new List<DateRange> { dateRange },
                     Dimensions = new List<Dimension> { dimension },
                     Metrics = new List<Metric> { metric, metricTwo, metricThree, metricFour }
@@ -153,7 +153,7 @@ namespace Sabio.Services
                 ReportRequest reportRequest = new ReportRequest
                 {
 
-                    ViewId = "280646633",
+                    ViewId = //ViewId,
                     DateRanges = new List<DateRange> { dateRange },
                     Dimensions = new List<Dimension> { dimension },
                     Metrics = new List<Metric> { metric }
@@ -188,7 +188,7 @@ namespace Sabio.Services
                 ReportRequest reportRequest = new ReportRequest
                 {
 
-                    ViewId = "280646633",
+                    ViewId = //ViewId,
                     DateRanges = new List<DateRange> { dateRange },
                     Dimensions = new List<Dimension> { dimension },
                     Metrics = new List<Metric> { metric }
@@ -220,7 +220,7 @@ namespace Sabio.Services
         }
         private GoogleCredential GoogleCreds()
         {
-            return GoogleCredential.FromFile($"{_webHostEnvironment.WebRootPath}/Keys/GoogleAnalyticAccCred.json").CreateScoped(new[] { AnalyticsReportingService.Scope.AnalyticsReadonly });
+            return GoogleCredential.FromFile(FilePath).CreateScoped(new[] { AnalyticsReportingService.Scope.AnalyticsReadonly });
         }
     }
 }
