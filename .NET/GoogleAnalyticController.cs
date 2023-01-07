@@ -38,69 +38,7 @@ namespace Sabio.Web.Api.Controllers
                 response = new ErrorResponse(ex.Message);
                 base.Logger.LogError(ex.ToString());
                 return StatusCode(code, response);
-            }
-           
-        }
-        [HttpPost("basic")]
-        public ActionResult RequestBasicData(GoogleAnalyticRequest model)
-        {
-            int code = 200;
-            GetReportsResponse responseReport = null;
-            BaseResponse response = null;
-            try
-            {
-                responseReport = _service.GetBasicAnalytics(model);
-                return StatusCode(code, responseReport);
-            }
-            catch (Exception ex)
-            {
-                code = 500;
-                response = new ErrorResponse(ex.Message);
-                base.Logger.LogError(ex.ToString());
-                return StatusCode(code, response);
-            }
-
-        }
-
-        [HttpPost("pageview")]
-        public ActionResult RequestPageViews(GoogleAnalyticRequest model)
-        {
-            int code = 200;
-            GetReportsResponse responseReport = null;
-            BaseResponse response = null;
-            try
-            {
-                responseReport = _service.GetPageViewData(model);
-                return StatusCode(code, responseReport);
-            }
-            catch (Exception ex)
-            {
-                code = 500;
-                response = new ErrorResponse(ex.Message);
-                base.Logger.LogError(ex.ToString());
-                return StatusCode(code, response);
-            }
-
-        }
-        [HttpPost("useraction")]
-        public ActionResult RequestUserAction(GoogleAnalyticRequest model)
-        {
-            int code = 200;
-            GetReportsResponse responseReport = null;
-            BaseResponse response = null;
-            try
-            {
-                responseReport = _service.GetUserActionData(model);
-                return StatusCode(code, responseReport);
-            }
-            catch (Exception ex)
-            {
-                code = 500;
-                response = new ErrorResponse(ex.Message);
-                base.Logger.LogError(ex.ToString());
-                return StatusCode(code, response);
-            }
-
+            }  
         }
     }
 }
