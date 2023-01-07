@@ -1,0 +1,29 @@
+ALTER proc [dbo].[Survey_Delete_ById]
+		@Id int
+
+as
+/* TEST CODE
+
+
+	DECLARE @Id int = 10
+
+	Execute  [dbo].[Survey_Delete_ById]
+			@Id
+			
+	Select *
+	FROM dbo.Surveys
+
+*/
+
+BEGIN
+
+	DECLARE @DatNow datetime2(7) = GETUTCDATE()
+
+	DECLARE @StatusId int = 2
+
+	UPDATE [dbo].[Surveys]
+		SET [StatusId] = @StatusId
+			,[DateModified] = @DatNow
+		WHERE @Id = Id
+
+END
