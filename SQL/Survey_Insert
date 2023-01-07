@@ -1,0 +1,82 @@
+ALTER proc [dbo].[Survey_Insert]
+		@Name nvarchar(100)
+		,@Description nvarchar(2000)
+		,@StatusId int
+		,@SurveyTypeId int
+		,@CreatedBy int
+		,@EntityTypeId int
+		,@VisaId int
+		,@RequirementId int
+		,@Id int OUTPUT
+as
+/*
+
+
+	DECLARE @Id int = 0	
+
+	
+	DECLARE @Name nvarchar(100) = 'Non Immigrant Experience V2'
+			,@Description nvarchar(2000) = 'Tell us about your experience'
+			,@StatusId int = 1
+			,@SurveyTypeId int = 1
+			,@CreatedBy int = 78
+			,@EntityTypeId int = 6
+			,@VisaId int = 2
+			,@RequirementId int = 1
+
+	Execute [dbo].[Survey_Insert]
+			@Name
+			,@Description
+			,@StatusId 
+			,@SurveyTypeId
+			,@CreatedBy 
+			,@EntityTypeId 
+			,@VisaId 
+			,@RequirementId 
+			,@Id OUTPUT
+
+
+		
+
+*/
+
+BEGIN
+
+	
+	
+	INSERT INTO [dbo].[Surveys]
+			   ([Name]
+			   ,[Description]
+			   ,[StatusId]
+			   ,[SurveyTypeId]
+			   ,[CreatedBy])
+	 VALUES
+			   (@Name
+			   ,@Description
+			   ,@StatusId
+			   ,@SurveyTypeId
+			   ,@CreatedBy)
+
+	SET @Id = SCOPE_IDENTITY()
+
+
+
+	INSERT INTO [dbo].[SurveyVisaCategories]
+				([SurveyId]
+				,[EntityTypeId]
+				,[VisaId])
+     VALUES
+			   (@Id
+			   ,@EntityTypeId
+			   ,@VisaId)
+
+
+	INSERT INTO [dbo].[SurveyRequirements]
+				([SurveyId]
+				,[RequirementId])
+     VALUES
+			   (@Id
+			   ,@RequirementId)
+
+
+END
