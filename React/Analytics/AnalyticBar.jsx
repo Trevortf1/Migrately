@@ -93,43 +93,6 @@ function AnalyticsBar() {
           </div>
         </Col>
       </Row>
-      <Row>
-        <Col xl={3} lg={6} md={12} sm={12}>
-          <StatAnalyticRightChart
-            title="USER"
-            value={topSearchResult.user}
-            classValue="mb-4"
-            chartName="UserChart"
-          />
-        </Col>
-
-        <Col xl={3} lg={6} md={12} sm={12}>
-          <StatAnalyticRightChart
-            title="UNIQUE VISITORS"
-            value={topSearchResult.uniqVisitors}
-            classValue="mb-4"
-            chartName="VisitorChart"
-          />
-        </Col>
-
-        <Col xl={3} lg={6} md={12} sm={12}>
-          <StatAnalyticRightChart
-            title="BOUNCE RATE"
-            value={topSearchResult.bounce}
-            classValue="mb-4"
-            chartName="UserChart"
-          />
-        </Col>
-
-        <Col xl={3} lg={6} md={12} sm={12}>
-          <StatAnalyticRightChart
-            title="AVERAGE VISIT TIME"
-            value={topSearchResult.avgVisit}
-            classValue="mb-4"
-            chartName="VisitorChart"
-          />
-        </Col>
-      </Row>
       <BottomAnalytics startDate={startDate} endDate={endDate} />
     </Fragment>
   );
